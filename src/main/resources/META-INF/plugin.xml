@@ -3,6 +3,18 @@
     <id>com.github.diydriller.aisqltranslator</id>
     <name>ai-sql-translator</name>
     <vendor>diydriller</vendor>
+    <vendor
+            url="https://github.com/diydriller/ai-sql-translator"
+            email="hyunjong8723@gmail.com">
+            diydriller
+    </vendor>
+    <description>
+        <![CDATA[
+            IntelliJ-based tool that converts queries using Generative AI.
+            1. Select the API key and database type in the settings tab.
+            2. In the translate tab, enter a query in the input field and click the apply button to display the converted query.
+        ]]>
+    </description>
 
     <depends>com.intellij.modules.platform</depends>
 
