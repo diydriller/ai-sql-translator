@@ -1,15 +1,18 @@
 package com.github.diydriller.aisqltranslator.tabs
 
+import com.github.diydriller.aisqltranslator.services.GlobalDataService
+import com.github.diydriller.aisqltranslator.services.OpenAiService
 import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
 import javax.swing.*
 
-class TranslateTab: JPanel() {
+class TranslateTab : JPanel() {
     private var fromSqlEditorPane = JEditorPane("text/plain", "")
     private var toSqlEditorPane = JEditorPane("text/plain", "")
     private val applyButton = JButton("Apply")
+    private val openAiService = OpenAiService()
 
     init {
         layout = GridBagLayout()
@@ -72,8 +75,18 @@ class TranslateTab: JPanel() {
 
         applyButton.preferredSize = Dimension(100, 30)
         applyButton.addActionListener {
-            JOptionPane.showMessageDialog(this, "Translation Success")
+            performTranslation()
         }
         add(applyButton, gbc)
+    }
+
+    private fun performTranslation() {
+        val sql = openAiService.translateSql(
+            GlobalDataService.getInstance().selectedFromSql!!,
+            GlobalDataService.getInstance().selectedToSql!!,
+            fromSqlEditorPane.text
+        )
+        toSqlEditorPane.text = sql
+        JOptionPane.showMessageDialog(this, "Translation Success")
     }
 }
